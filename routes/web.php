@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogPostController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
+
+
+
+
 // class Person
 // {
 //     public $age;
@@ -24,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 //         $this->name = $name;
 //     }
 // }
+
 
 
 Route::get('/{id}', function ($id) {
@@ -38,6 +48,9 @@ Route::get('/about', function () {
     return view('about');
 })->name('regular.about');
 
+
+
+
 Route::group(['prefix' => 'test'], function () {
     Route::get('/home', function () {
         return redirect()->route('test.root');
@@ -51,6 +64,12 @@ Route::group(['prefix' => 'test'], function () {
         return view('test', ["var" => $param]);
     })->name('test.root');
 });
+
+
+Route::get('/posts', [BlogPostController::class, 'index'])->name('posts.index');
+Route::get('/posts/{id}', [BlogPostController::class, 'show'])->name('posts.show');
+Route::post('/posts', [BlogPostController::class, 'store']);
+
 
 Route::any('/{any}', function () {
     print("404 - No such route, buddy!");
