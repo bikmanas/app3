@@ -4,7 +4,7 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogPostController;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,7 +69,14 @@ Route::group(['prefix' => 'test'], function () {
 Route::get('/posts', [BlogPostController::class, 'index'])->name('posts.index');
 Route::get('/posts/{id}', [BlogPostController::class, 'show'])->name('posts.show');
 Route::post('/posts', [BlogPostController::class, 'store']);
+Route::put('/posts/{id}', [BlogPostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{id}', [BlogPostController::class, 'destroy'])->name('posts.destroy');
 
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::any('/{any}', function () {
     print("404 - No such route, buddy!");

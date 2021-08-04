@@ -12,9 +12,10 @@
             <li class="nav-item {{ Request::routeIs('regular.about') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('regular.about') }}">About</a>
             </li>
-            <li class="nav-item {{ route(Route::currentRouteName()) == route('posts.index') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::routeIs('posts.index') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
             </li>
+
         </ul>
     </div>
 </nav>
